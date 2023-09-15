@@ -5,6 +5,7 @@ pipeline {
         stage('Docker build') {
             steps {
                 sh '''
+                    export
                     echo $HashCommit
                 '''
             }

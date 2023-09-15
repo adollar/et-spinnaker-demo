@@ -2,9 +2,12 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Docker build') {
             steps {
-                echo 'Running unit tests...'
+                sh '''
+                    export
+                    echo $HashCommit
+                '''
             }
         }
     }

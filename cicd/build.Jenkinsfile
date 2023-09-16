@@ -25,7 +25,10 @@ pipeline {
     stage('docker build') {
       steps {
         container('docker') {
-          sh 'docker ps'
+          sh '''
+              ls -l
+              docker ps
+          '''
         }
       }
     }

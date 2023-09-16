@@ -1,16 +1,15 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.5.0'
-        }
-    }
+    agent any
     stages {
         stage('Docker build') {
-            steps {
-                sh '''
-                    docker ps
-                '''
+            container('dind') {
+                steps {
+                    sh '''
+                        docker ps
+                    '''
+                }
             }
+
         }
     }
 }

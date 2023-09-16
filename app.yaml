@@ -16,7 +16,7 @@ spec:
         app: et-app
     spec:
       containers:
-        - image: 'hpkns/spinnaker-demo:${HashCommit}'
+        - image: 'hpkns/spinnaker-demo:${trigger.parameters["HashCommit"]}'
           name: et-app
           ports:
             - containerPort: 80

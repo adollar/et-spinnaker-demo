@@ -5,14 +5,11 @@ pipeline {
         }
     stages {
         stage('Docker build') {
-            container('dind') {
-                steps {
-                    sh '''
-                        docker ps
-                    '''
-                }
+            steps {
+                sh '''
+                    docker ps
+                '''
             }
-
         }
     }
 }

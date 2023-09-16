@@ -16,7 +16,7 @@ spec:
         app: et-app
     spec:
       containers:
-        - image: 'hpkns/spinnaker-demo:f3dcdff14f7b8d765f5cc80b8e03b551096f187f'
+        - image: 'hpkns/spinnaker-demo:${HashCommit}'
           name: et-app
           ports:
             - containerPort: 80

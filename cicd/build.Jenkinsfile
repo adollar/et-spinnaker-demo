@@ -31,7 +31,7 @@ pipeline {
           sh '''
               echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
               docker build . -t et/spinnaker-demo
-              docker push et/spinnaker-demo
+              docker push et/spinnaker-demo:${HashCommit}
           '''
         }
       }

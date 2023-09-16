@@ -30,8 +30,8 @@ pipeline {
         container('docker') {
           sh '''
               echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-              docker build . -t et/spinnaker-demo:${HashCommit}
-              docker push et/spinnaker-demo:${HashCommit}
+              docker build . -t hpkns/spinnaker-demo:${HashCommit}
+              docker push hpkns/spinnaker-demo:${HashCommit}
           '''
         }
       }

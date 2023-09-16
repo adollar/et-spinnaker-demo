@@ -30,7 +30,7 @@ pipeline {
         container('docker') {
           sh '''
               echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-              docker build ./app -t et/spinnaker-demo
+              docker build . -t et/spinnaker-demo
               docker push et/spinnaker-demo
           '''
         }

@@ -6,7 +6,7 @@ metadata:
   name: et-app
   namespace: '${trigger.parameters["Env"]}'
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: et-app

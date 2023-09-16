@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: et-app
+  name: et-app
+  namespace: ${Env}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: et-app
+  template:
+    metadata:
+      labels:
+        app: et-app
+    spec:
+      containers:
+        - image: 'hpkns/spinnaker-demo:${HashCommit}'
+          name: et-app
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-service
+  namespace: ${Env}
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 5000
+  selector:
+    app: et-app
+  type: LoadBalancer

@@ -17,6 +17,7 @@ spec:
         fsGroup: 1000
         runAsUser: 1000
       serviceAccountName: jenkins-admin
+      containers:
         - name: jenkins
           image: jenkins/jenkins:lts
           env:
@@ -57,6 +58,8 @@ spec:
               readOnly: true
               mountPath: "/home/jenkins/.ssh"
       volumes:
+        - name: dind-storage
+          emptyDir: {}
         - name: jenkins-ssh-secret
           secret:
             secretName: jenkins-ssh-secret

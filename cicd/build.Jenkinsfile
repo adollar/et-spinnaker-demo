@@ -25,12 +25,28 @@ pipeline {
     DOCKERHUB_CREDENTIALS = credentials('docker-hub-creds')
   }
   stages {
-    stage('docker build') {
+    stage('Docker login') {
       steps {
         container('docker') {
           sh '''
               echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+          '''
+        }
+      }
+    }
+    stage('Docker build') {
+      steps {
+        container('docker') {
+          sh '''
               docker build . -t hpkns/spinnaker-demo:${HashCommit}
+          '''
+        }
+      }
+    }
+    stage('Docker push') {
+      steps {
+        container('docker') {
+          sh '''
               docker push hpkns/spinnaker-demo:${HashCommit}
           '''
         }

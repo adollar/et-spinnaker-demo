@@ -1,15 +1,14 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:18.17.1-alpine3.18' }
+    }
     stages {
         stage('Docker build') {
-            container('dind') {
-                steps {
-                    sh '''
-                        docker ps
-                    '''
-                }
+            steps {
+                sh '''
+                    docker ps
+                '''
             }
-
         }
     }
 }

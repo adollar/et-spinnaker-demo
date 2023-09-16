@@ -1,46 +1,37 @@
 pipeline {
-    options {
-        disableConcurrentBuilds()
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+          - name: maven
+            image: maven:alpine
+            command:
+            - cat
+            tty: true
+          - name: docker
+            image: docker:latest
+            command:
+            - cat
+            tty: true
+            volumeMounts:
+             - mountPath: /var/run/docker.sock
+               name: docker-sock
+          volumes:
+          - name: docker-sock
+            hostPath:
+              path: /var/run/docker.sock
+        '''
     }
-    agent {
-        kubernetes {
-            label 'docker-in-docker-maven'
-            yaml """
-apiVersion: v1
-kind: Pod
-spec:
-containers:
-- name: docker-client
-  image: docker:19.03.1
-  command: ['sleep', '99d']
-  env:
-    - name: DOCKER_HOST
-      value: tcp://localhost:2375
-- name: docker-daemon
-  image: docker:19.03.1-dind
-  env:
-    - name: DOCKER_TLS_CERTDIR
-      value: ""
-  securityContext:
-    privileged: true
-  volumeMounts:
-      - name: cache
-        mountPath: /var/lib/docker
-volumes:
-  - name: cache
-    hostPath:
-      path: /tmp
-      type: Directory
-"""
+  }
+  stages {
+    stage('docker build') {
+      steps {
+        container('docker') {
+          sh 'docker ps'
         }
-    }
-    stages {
-        stage('Docker Build') {
-            steps {
-                container('docker-client') {
-                    sh 'docker version'
-                }
-            }
-        }
+      }
     }
 }

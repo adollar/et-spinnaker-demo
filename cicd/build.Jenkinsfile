@@ -3,9 +3,7 @@ pipeline {
   stages {
     stage('docker build') {
       steps {
-        container('dind') {
-          sh 'docker version'
-        }
+        sh 'docker version'
       }
     }
   }

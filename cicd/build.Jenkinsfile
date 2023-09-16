@@ -21,13 +21,17 @@ pipeline {
         '''
     }
   }
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('docker-hub-creds')
+  }
   stages {
     stage('docker build') {
       steps {
         container('docker') {
           sh '''
-              ls -l
-              docker ps
+              echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+              docker build ./app -t et/spinnaker-demo
+              docker push et/spinnaker-demo
           '''
         }
       }

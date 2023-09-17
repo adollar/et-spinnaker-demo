@@ -4,8 +4,6 @@ metadata:
   annotations:
     traffic.spinnaker.io/load-balancers: '["service et-app-service"]'
     strategy.spinnaker.io/max-version-history: '2'
-  labels:
-    app: et-app
   name: et-app
   namespace: '${trigger.parameters["Env"]}'
 spec:

@@ -6,6 +6,8 @@ metadata:
     strategy.spinnaker.io/max-version-history: '2'
   name: et-app
   namespace: '${trigger.parameters["Env"]}'
+  labels:
+    app: et-app
 spec:
   replicas: 4
   selector:

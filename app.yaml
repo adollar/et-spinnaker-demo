@@ -5,6 +5,8 @@ metadata:
     app: et-app
   name: et-app
   namespace: '${trigger.parameters["Env"]}'
+  annotations:
+    traffic.spinnaker.io/load-balancers: '["service et-app-service"]'
 spec:
   replicas: 4
   selector:

@@ -36,5 +36,6 @@ spec:
       nodePort: 30100
       protocol: TCP
   selector:
+    frontedBy: et-app-service
     app: et-app
   type: NodePort

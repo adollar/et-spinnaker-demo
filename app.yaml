@@ -5,21 +5,21 @@ metadata:
     traffic.spinnaker.io/load-balancers: '["service et-app-service"]'
     strategy.spinnaker.io/max-version-history: '2'
   name: et-app
-  namespace: '${trigger.parameters["Env"]}'
+  namespace: app-dev
   labels:
-    app: et-app
+    app-name: et-app
 spec:
-  replicas: 4
+  replicas: 2
   selector:
     matchLabels:
-      app: et-app
+      app-name: et-app
   template:
     metadata:
       labels:
-        app: et-app
+        app-name: et-app
     spec:
       containers:
-        - image: 'hpkns/spinnaker-demo:${trigger.parameters["HashCommit"]}'
+        - image: 'hpkns/spinnaker-demo:9a45274a3d7c267861815be8f9f3f12f1bfa65bf'
           name: et-app
           ports:
             - containerPort: 80
@@ -36,6 +36,5 @@ spec:
       nodePort: 30100
       protocol: TCP
   selector:
-    frontedBy: et-app-service
     app: et-app
   type: NodePort

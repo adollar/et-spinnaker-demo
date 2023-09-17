@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
   annotations:
     traffic.spinnaker.io/load-balancers: '["service et-app-service"]'

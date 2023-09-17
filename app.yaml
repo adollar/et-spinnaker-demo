@@ -1,6 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    traffic.spinnaker.io/load-balancers: '["service et-app-service"]'
+    strategy.spinnaker.io/max-version-history: '2'
   labels:
     app: et-app
   name: et-app
@@ -12,8 +15,6 @@ spec:
       app: et-app
   template:
     metadata:
-      annotations:
-        traffic.spinnaker.io/load-balancers: '["service et-app-service"]'
       labels:
         app: et-app
     spec:

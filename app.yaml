@@ -5,8 +5,6 @@ metadata:
     app: et-app
   name: et-app
   namespace: '${trigger.parameters["Env"]}'
-  annotations:
-    traffic.spinnaker.io/load-balancers: '["service et-app-service"]'
 spec:
   replicas: 4
   selector:
@@ -14,6 +12,8 @@ spec:
       app: et-app
   template:
     metadata:
+      annotations:
+        traffic.spinnaker.io/load-balancers: '["service et-app-service"]'
       labels:
         app: et-app
     spec:
@@ -27,7 +27,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: et-app-sevice
+    app: et-app-service
   name: et-app-service
   namespace: '${trigger.parameters["Env"]}'
 spec:

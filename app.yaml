@@ -3,9 +3,9 @@ kind: ReplicaSet
 metadata:
   annotations:
     traffic.spinnaker.io/load-balancers: '["service et-app-service"]'
-    strategy.spinnaker.io/max-version-history: '2'
+    strategy.spinnaker.io/max-version-history: '4'
   name: et-app
-  namespace: app-dev
+  namespace: '${trigger.parameters["Env"]}'
   labels:
     app-name: et-app
 spec:
@@ -19,7 +19,7 @@ spec:
         app-name: et-app
     spec:
       containers:
-        - image: 'hpkns/spinnaker-demo:9a45274a3d7c267861815be8f9f3f12f1bfa65bf'
+        - image: 'hpkns/spinnaker-demo:${trigger.parameters["HashCommit"]}'
           name: et-app
           ports:
             - containerPort: 80

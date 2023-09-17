@@ -24,6 +24,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  labels:
+    app: et-app-sevice
   name: et-app-service
   namespace: '${trigger.parameters["Env"]}'
 spec:

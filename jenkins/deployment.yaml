@@ -13,11 +13,15 @@ spec:
       labels:
         app: jenkins-server
     spec:
-      securityContext:
-        fsGroup: 1000
-        runAsUser: 1000
       serviceAccountName: jenkins-admin
       containers:
+        - name: dind
+          image: docker:18.05-dind
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: dind-storage
+              mountPath: /var/lib/docker
         - name: jenkins
           image: jenkins/jenkins:lts
           env:

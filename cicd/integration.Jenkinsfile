@@ -29,7 +29,7 @@ pipeline {
       steps {
         container('docker') {
           sh '''
-            echo "Running for hash commit ${HashCommit}...""
+            echo "Running for hash commit ${HashCommit}..."
           '''
         }
       }

@@ -30,9 +30,8 @@ pipeline {
         container('docker') {
           sh '''
             echo "Runnine receive-param for hash commit ${HashCommit}..."
-            echo "TEST_ARG=${TEST_ARG}" artifact.properties
+            echo "Received param TEST_ARG=${TEST_ARG}"
           '''
-          archiveArtifacts artifacts: 'artifact.properties'
         }
       }
     }

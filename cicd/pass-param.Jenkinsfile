@@ -29,8 +29,10 @@ pipeline {
       steps {
         container('docker') {
           sh '''
-            echo "Running end-to-end for hash commit ${HashCommit}..."
+            echo "Running pass-param for hash commit ${HashCommit}..."
+            echo TEST_ARG=123 > artifact.properties
           '''
+          archiveArtifacts artifacts: 'artifact.properties'
         }
       }
     }

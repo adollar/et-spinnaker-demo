@@ -29,8 +29,10 @@ pipeline {
       steps {
         container('docker') {
           sh '''
-            echo "Running end-to-end for hash commit ${HashCommit}..."
+            echo "Runnine receive-param for hash commit ${HashCommit}..."
+            echo "TEST_ARG=${TEST_ARG}" artifact.properties
           '''
+          archiveArtifacts artifacts: 'artifact.properties'
         }
       }
     }

@@ -9,7 +9,7 @@ metadata:
   labels:
     app-name: et-app
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app-name: et-app

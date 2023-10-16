@@ -30,7 +30,7 @@ pipeline {
         container('docker') {
           sh '''
             echo "Running pass-param for hash commit ${HashCommit}..."
-            echo TEST_ARG=${TEST_ARG} > artifact.properties
+            echo TEST_ARG=PARAM-TO-PASS > artifact.properties
           '''
           archiveArtifacts artifacts: 'artifact.properties'
         }
